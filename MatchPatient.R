@@ -7,7 +7,7 @@ pacman::p_load(knitr, wakefield, MatchIt, tableone, captioner)
 #Processing data form center 1
 wb = 'RawData_center1.csv'
 clinic_data =  read.csv(wb, header = TRUE, sep = ',')
-row.names(clinic_data) = clinic_data$X
+row.names(clinic_data) = clinic_data$Pat_ID
 names(clinic_data)
 #treatment=0: CCRT, treatment=1: ICT+CCRT
 clinic_data$treatment = ifelse(clinic_data$treatment<0.5,0,1)
@@ -91,7 +91,7 @@ write.csv(df.match, file = wb, row.names = F)
 #Processing data form center 2-4
 wb = 'RawData_center2-4.csv'
 test_extra = read.csv(wb, header = TRUE, sep = ',')
-row.names(test_extra) = test_extra$X
+row.names(test_extra) = test_extra$Pat_ID
 test_extra$treatment = ifelse(test_extra$treatment<0.5,0,1)
 #Truncate clinical factor
 test_extra$WHOcut = ifelse(test_extra$WHO>1,1,0)
