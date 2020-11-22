@@ -41,7 +41,7 @@ x1 = tmp_data$age
 group = tmp_data$treatment
 kruskal.test(x1,factor(group))
 
-#categorical variables were tested by either the Pearson¡¯s ¦Ö2 test or the Fisher¡¯s exact test.
+#categorical variables were tested by either the Pearson's x2 test or the Fisher's exact test.
 source('chisq-fisher-test.r')
 name =  c("sex","HGBcut","CRPcut","LDHcut","ALBcut","EBV_4k","smokingcut","drinkingcut","His_cancercut")
 for(s in name){
@@ -144,7 +144,7 @@ x1 = tmp_data$age
 group = tmp_data$treatment
 kruskal.test(x1,factor(group))
 
-#categorical variables were tested by either the Pearson¡¯s ¦Ö2 test or the Fisher¡¯s exact test.
+#categorical variables were tested by either the Pearson's x2 test or the Fisher's exact test.
 name =  c("sex","HGBcut","CRPcut","LDHcut","ALBcut","EBV_4k","smokingcut","drinkingcut","His_cancercut")
 for(s in name){
   x1 = tmp_data[,s]
@@ -165,6 +165,6 @@ for(s in name){
   print("******************")
 }
 
-#save data from center 1 for analysis
-wb = 'External_test_data.csv'
+#save data from center 2-4 for analysis
+wb = 'matched_data_from_center2-4'
 write.csv(test_extra, file = wb, row.names = F)
