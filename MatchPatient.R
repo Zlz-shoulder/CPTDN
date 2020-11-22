@@ -41,7 +41,7 @@ x1 = tmp_data$age
 group = tmp_data$treatment
 kruskal.test(x1,factor(group))
 
-#categorical variables were tested by either the Pearson¡¯s ¦Ö2 test or the Fisher¡¯s exact test.
+#categorical variables were tested by either the PearsonÂ¡Â¯s Â¦Ã–2 test or the FisherÂ¡Â¯s exact test.
 source('chisq-fisher-test.r')
 name =  c("sex","HGBcut","CRPcut","LDHcut","ALBcut","EBV_4k","smokingcut","drinkingcut","His_cancercut")
 for(s in name){
@@ -83,7 +83,7 @@ df.match[ind_val, 'data_cohort1'] = 1
 df.match$data_cohort2 = 0
 df.match[ind_test, 'data_cohort2'] = 1
 #save matched data from center 1 for analysis
-wb = 'C:/Users/18292/Desktop/NPC_ICT_vs_CCRT/new10/new10_matched_data.csv'
+wb = 'matched_data_from_center1'
 write.csv(df.match, file = wb, row.names = F)
 
 ##########################################################
@@ -144,7 +144,7 @@ x1 = tmp_data$age
 group = tmp_data$treatment
 kruskal.test(x1,factor(group))
 
-#categorical variables were tested by either the Pearson¡¯s ¦Ö2 test or the Fisher¡¯s exact test.
+#categorical variables were tested by either the PearsonÂ¡Â¯s Â¦Ã–2 test or the FisherÂ¡Â¯s exact test.
 name =  c("sex","HGBcut","CRPcut","LDHcut","ALBcut","EBV_4k","smokingcut","drinkingcut","His_cancercut")
 for(s in name){
   x1 = tmp_data[,s]
