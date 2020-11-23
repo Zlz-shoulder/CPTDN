@@ -12,12 +12,14 @@ names(clinic_data)
 #treatment=0: CCRT, treatment=1: ICT+CCRT
 clinic_data$treatment = ifelse(clinic_data$treatment<0.5,0,1)
 #Truncate clinical factor
+clinic_data$age = clinic_data$age/100
+clinic_data$EBV_DNA = ifelse(clinic_data$EBV_DNA>16000,16000,clinic_data$EBV_DNA)/16000
+clinic_data$EBV_4k = ifelse(clinic_data$EBV_DNA>16000/4000,1,0)
+clinic_data$LDH = ifelse(clinic_data$LDH>400,400,clinic_data$LDH)/400
+clinic_data$LDHcut = ifelse(clinic_data$LDH<120/400 | clinic_data$LDH>250/400,1,0)
+clinic_data$HGB = ifelse(clinic_data$HGB>200,200,clinic_data$HGB)/200
+clinic_data$HGBcut = ifelse(clinic_data$sex == 0,ifelse(clinic_data$HGB<130/200 | clinic_data$HGB>175/200,1,0),ifelse(clinic_data$HGB<115/200 | clinic_data$HGB>150/200,1,0))
 clinic_data$WHOcut = ifelse(clinic_data$WHO>1,1,0)
-clinic_data$EBV_4k = ifelse(clinic_data$EBV_DNA>4000,1,0)
-clinic_data$LDHcut = ifelse(clinic_data$LDH<120 | clinic_data$LDH>250,1,0)
-clinic_data$CRPcut = ifelse(clinic_data$CRP>3,1,0)
-clinic_data$ALBcut = ifelse(clinic_data$ALB<40 | clinic_data$ALB>55,1,0)
-clinic_data$HGBcut = ifelse(clinic_data$sex == 0,ifelse(clinic_data$HGB<130 | clinic_data$HGB>175,1,0),ifelse(clinic_data$HGB<115 | clinic_data$HGB>150,1,0))
 
 #Match baseline characteristics between treatment
 set.seed(1234)
@@ -41,7 +43,7 @@ x1 = tmp_data$age
 group = tmp_data$treatment
 kruskal.test(x1,factor(group))
 
-#categorical variables were tested by either the Pearson's x2 test or the Fisher's exact test.
+#categorical variables were tested by either the Pearson’s χ2 test or the Fisher’s exact test.
 source('chisq-fisher-test.r')
 name =  c("sex","HGBcut","CRPcut","LDHcut","ALBcut","EBV_4k","smokingcut","drinkingcut","His_cancercut")
 for(s in name){
@@ -83,7 +85,7 @@ df.match[ind_val, 'data_cohort1'] = 1
 df.match$data_cohort2 = 0
 df.match[ind_test, 'data_cohort2'] = 1
 #save matched data from center 1 for analysis
-wb = 'matched_data_from_center1'
+wb = 'matched_data_from_center1.csv'
 write.csv(df.match, file = wb, row.names = F)
 
 ##########################################################
@@ -94,12 +96,14 @@ test_extra = read.csv(wb, header = TRUE, sep = ',')
 row.names(test_extra) = test_extra$Pat_ID
 test_extra$treatment = ifelse(test_extra$treatment<0.5,0,1)
 #Truncate clinical factor
+test_extra$age = test_extra$age/100
+test_extra$EBV_DNA = ifelse(test_extra$EBV_DNA>16000,16000,test_extra$EBV_DNA)/16000
+test_extra$EBV_4k = ifelse(test_extra$EBV_DNA>16000/4000,1,0)
+test_extra$LDH = ifelse(test_extra$LDH>400,400,test_extra$LDH)/400
+test_extra$LDHcut = ifelse(test_extra$LDH<120/400 | test_extra$LDH>250/400,1,0)
+test_extra$HGB = ifelse(test_extra$HGB>200,200,test_extra$HGB)/200
+test_extra$HGBcut = ifelse(test_extra$sex == 0,ifelse(test_extra$HGB<130/200 | test_extra$HGB>175/200,1,0),ifelse(test_extra$HGB<115/200 | test_extra$HGB>150/200,1,0))
 test_extra$WHOcut = ifelse(test_extra$WHO>1,1,0)
-test_extra$EBV_4k = ifelse(test_extra$EBV_DNA>4000,1,0)
-test_extra$LDHcut = ifelse(test_extra$LDH<120 | test_extra$LDH>250,1,0)
-test_extra$CRPcut = ifelse(test_extra$CRP>3,1,0)
-test_extra$ALBcut = ifelse(test_extra$ALB<40 | test_extra$ALB>55,1,0)
-test_extra$HGBcut = ifelse(test_extra$sex == 0,ifelse(test_extra$HGB<130 | test_extra$HGB>175,1,0),ifelse(test_extra$HGB<115 | test_extra$HGB>150,1,0))
 
 
 
@@ -144,7 +148,7 @@ x1 = tmp_data$age
 group = tmp_data$treatment
 kruskal.test(x1,factor(group))
 
-#categorical variables were tested by either the Pearson's x2 test or the Fisher's exact test.
+#categorical variables were tested by either the Pearson’s χ2 test or the Fisher’s exact test.
 name =  c("sex","HGBcut","CRPcut","LDHcut","ALBcut","EBV_4k","smokingcut","drinkingcut","His_cancercut")
 for(s in name){
   x1 = tmp_data[,s]
@@ -166,5 +170,5 @@ for(s in name){
 }
 
 #save data from center 2-4 for analysis
-wb = 'matched_data_from_center2-4'
+wb = 'matched_data_from_center2-4.csv'
 write.csv(test_extra, file = wb, row.names = F)
