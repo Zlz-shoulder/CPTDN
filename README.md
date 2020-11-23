@@ -6,3 +6,6 @@ Induction chemotherapy (ICT) plus concurrent chemoradiotherapy (CCRT) and CCRT a
 !(https://github.com/Zlz-shoulder/CPTDN/blob/main/CPTDN.png)
 Zlz-shoulder/CPTDN/CPTDN.png
 ![Zlz-shoulder](CPTDN/CPTDN.png)
+
+!(CPTDN/CPTDN.png)
+!(CPTDN/blob/main/CPTDN.png)
