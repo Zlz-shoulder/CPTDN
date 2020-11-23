@@ -51,7 +51,7 @@ x1 = c(tra_data$tumor_volume, test_data$tumor_volume, match_ext_data$tumor_volum
 group = c(rep(1,nrow(tra_data)),rep(2,nrow(test_data)),rep(3,nrow(match_ext_data)))
 kruskal.test(x1,factor(group))
 
-#categorical variables were tested by either the Pearson¡¯s ¦Ö2 test or the Fisher¡¯s exact test.
+#categorical variables were tested by either the PearsonÂ¡Â¯s Â¦Ã–2 test or the FisherÂ¡Â¯s exact test.
 source('chisq-fisher-test.r')
 name = c("DFS","sex","HGBcut","CRPcut","LDHcut","ALBcut","EBV_4k","smokingcut","WHOcut","drinkingcut","His_cancercut","treatment")
 for(s in name){
@@ -78,7 +78,7 @@ for(s in name){
 #read deep-learning signature
 wb = 'all_MR_dlFeature.csv'
 DL_data =  read.csv(wb, header = TRUE, sep = ',')
-row.names(DL_data) = DL_data$Pat_ID
+row.names(DL_data) = DL_data$X
 
 name1 = row.names(tra_data)
 tra_data$Prog_score = DL_data[name1, 'Prog_score']
@@ -627,7 +627,7 @@ tmp = c(tmp,cd$c.index,cd$lower,cd$upper)
 model_performance = c(model_performance, tmp)
 
 
-#Comparison of prognostic models¡¯ performance on different treatment-specific subgroups (Figure 2)
+#Comparison of prognostic modelsÂ¡Â¯ performance on different treatment-specific subgroups (Figure 2)
 
 nn = length(model_performance)
 data_esti_CCRT = model_performance[seq(1,nn,6)]
