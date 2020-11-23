@@ -78,7 +78,7 @@ for(s in name){
 #read deep-learning signature
 wb = 'all_MR_dlFeature.csv'
 DL_data =  read.csv(wb, header = TRUE, sep = ',')
-row.names(DL_data) = DL_data$X
+row.names(DL_data) = DL_data$Pat_ID
 
 name1 = row.names(tra_data)
 tra_data$Prog_score = DL_data[name1, 'Prog_score']
